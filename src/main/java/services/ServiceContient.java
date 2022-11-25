@@ -3,11 +3,9 @@ package services;
 import com.google.gson.JsonObject;
 
 import dao.DaoException;
-import dao.impl.DaoClient;
 import dao.impl.DaoContient;
 import dao.impl.DaoPanier;
 import dao.impl.DaoProduit;
-import models.Client;
 import models.Contient;
 import models.Panier;
 import models.Produit;
