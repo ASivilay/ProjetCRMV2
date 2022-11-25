@@ -1,11 +1,40 @@
 package models;
 
-public class Produit {
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "produit")
+public class Produit {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(nullable = false, length = 255)
 	private String nom;
+	
+	@Column
 	private String description;
+	
+	@Column()
 	private float prix;
+
+	
+	@ManyToMany(mappedBy = "produits")
+	private List<Panier> paniers = new ArrayList<>();
+	
+	
+	
+	
 
 	/* Constructeurs */
 	public Produit() {
@@ -24,6 +53,8 @@ public class Produit {
 		this.setPrix(prix);
 	}
 
+	
+	
 	/* Getters Setters */
 	public Long getId() {
 		return id;
@@ -56,7 +87,29 @@ public class Produit {
 	public void setPrix(float prix) {
 		this.prix = prix;
 	}
+	
+	
+	public List<Panier> getPaniers() {
+		return paniers;
+	}
 
+	public void setPaniers(List<Panier> paniers) {
+		this.paniers = paniers;
+	}
+	
+	public void addProduit(Panier panier) {
+		this.paniers.add(panier);
+		panier.getProduits().add(this);
+	}
+	
+	public void removeProduit(Panier panier) {
+		this.paniers.remove(panier);
+		panier.getProduits().remove(this);
+	}
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "[" + this.getId() + "] " + this.getNom() + " - " + this.getDescription() + " - " + this.getPrix();

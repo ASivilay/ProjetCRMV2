@@ -1,13 +1,43 @@
 package models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "adresse")
 public class Adresse {
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(nullable = false, length = 255)
 	private String rue;
+	
+	@Column(nullable = false, length = 255)
 	private String ville;
+	
+	@Column(nullable = false, length = 255)
 	private String pays;
+	
+	@Column(nullable = false, length = 255)
 	private String codePostal;
+	
+	
+	@OneToOne(mappedBy = "adresse", fetch = FetchType.LAZY)
+	private Client client;
 
+	
+	
+	
+
+	//Constructeurs
 	public Adresse() {
 	}
 
@@ -66,7 +96,16 @@ public class Adresse {
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
+	
+	public Client getClient() {
+		return client;
+	}
 
+	public void setClient(Client client) {
+		this.client = client;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "[" + this.getId() + "] " + this.getRue() + " " + this.getCodePostal() + " " + this.getVille() + " " + this.getPays();
