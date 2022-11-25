@@ -1,14 +1,9 @@
 package models;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-=======
-import java.util.List;
-
->>>>>>> origin/Jean-Sebastien
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +21,6 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-<<<<<<< HEAD
 	
 	@Column(nullable = false, length = 255)
 	private String nom;
@@ -39,38 +33,6 @@ public class Client {
 	
 	@Column(length = 255)
 	private String nomSociete;
-=======
-
-	@Column(nullable = false, length = 255)
-	private String nom;
-
-	@Column(nullable = false, length = 255)
-	private String prenom;
-
-	@Column(nullable = false, length = 255)
-	private String mail;
-
-	@Column(nullable = true, length = 255)
-	private String nomSociete;
-
-	@Column(nullable = false, length = 10)
-	private String telephone;
-
-	@Column(nullable = true)
-	private int etat;
-
-	@Column(nullable = true)
-	private int genre;
-
-	@OneToOne(fetch = FetchType.LAZY)
-	private Adresse adresse;
-	
-	@OneToMany(mappedBy="client")
-	private List<Panier> paniers;
-	
-	@OneToOne(mappedBy="client", fetch=FetchType.LAZY )
-	private Paiement paiement;
->>>>>>> origin/Jean-Sebastien
 
 	@Column(length = 10)
 	private String telephone;
@@ -212,32 +174,6 @@ public class Client {
 	
 	@Override
 	public String toString() {
-		return "[" + this.getId() + "] " + this.getNomSociete() + " - " + this.getMail() + " - " + this.getNom() + " "
-				+ this.getPrenom() + " - " + this.telephone + " - " + this.getEtat() + " - " + this.getGenre() + " - "
-				+ adresse.toString();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if(((Client) obj).getId() != this.id) {
-			return false;
-		}
-		return true;
-	}
-
-	public List<Panier> getPaniers() {
-		return paniers;
-	}
-
-	public void setPaniers(List<Panier> paniers) {
-		this.paniers = paniers;
-	}
-
-	public Paiement getPaiement() {
-		return paiement;
-	}
-
-	public void setPaiement(Paiement paiement) {
-		this.paiement = paiement;
+		return "[" + this.getId() + "] " + this.getNomSociete() + " - " + this.getMail() + " - " + this.getNom() + " " + this.getPrenom() + " - " + this.telephone + " - " + this.getEtat() + " - " + this.getGenre() + " - " + adresse.toString();
 	}
 }

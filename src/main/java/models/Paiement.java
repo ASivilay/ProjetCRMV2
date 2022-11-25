@@ -6,26 +6,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-<<<<<<< HEAD
 import javax.persistence.ManyToOne;
-=======
-import javax.persistence.OneToOne;
->>>>>>> origin/Jean-Sebastien
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "paiement")
 public class Paiement {
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> origin/Jean-Sebastien
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-<<<<<<< HEAD
 	@Column(nullable = false, length = 255)
 	private int numCarte;
 	
@@ -36,18 +27,6 @@ public class Paiement {
 	private String banque;
 	
 	@ManyToOne( fetch = FetchType.LAZY )
-=======
-	@Column(nullable = false)
-	private int numCarte;
-	
-	@Column(nullable = false)
-	private int codeConf;
-	
-	@Column(nullable = true, length = 255)
-	private String banque;;
-	
-	@OneToOne(fetch = FetchType.LAZY)
->>>>>>> origin/Jean-Sebastien
 	private Client client;
 	
 	
@@ -118,11 +97,4 @@ public class Paiement {
 		return "[" + id + "] " + this.getNumCarte() + " - " + this.getCodeConf() + " - " + this.getBanque()	+ " - "+ client.toString();
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if(((Paiement) obj).getId() != this.id) {
-			return false;
-		}
-		return true;
-	}
 }
