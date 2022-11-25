@@ -1,8 +1,5 @@
 package adapters;
 
-<<<<<<< HEAD
-public class PanierAdapter {
-=======
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -50,6 +47,5 @@ public class PanierAdapter implements JsonSerializer<Panier> {
 
 		return json;
 	}
->>>>>>> origin/Jean-Sebastien
 
 }
