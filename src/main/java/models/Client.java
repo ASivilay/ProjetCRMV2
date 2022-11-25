@@ -1,16 +1,54 @@
 package models;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "client")
 public class Client {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(nullable = false, length = 255)
 	private String nom;
+
+	@Column(nullable = false, length = 255)
 	private String prenom;
+
+	@Column(nullable = false, length = 255)
 	private String mail;
+
+	@Column(nullable = true, length = 255)
 	private String nomSociete;
+
+	@Column(nullable = false, length = 10)
 	private String telephone;
+
+	@Column(nullable = true)
 	private int etat;
+
+	@Column(nullable = true)
 	private int genre;
+
+	@OneToOne(fetch = FetchType.LAZY)
 	private Adresse adresse;
+	
+	@OneToMany(mappedBy="client")
+	private List<Panier> paniers;
+	
+	@OneToOne(mappedBy="client", fetch=FetchType.LAZY )
+	private Paiement paiement;
 
 	public Client() {
 	}
@@ -114,6 +152,32 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "[" + this.getId() + "] " + this.getNomSociete() + " - " + this.getMail() + " - " + this.getNom() + " " + this.getPrenom() + " - " + this.telephone + " - " + this.getEtat() + " - " + this.getGenre() + " - " + adresse.toString();
+		return "[" + this.getId() + "] " + this.getNomSociete() + " - " + this.getMail() + " - " + this.getNom() + " "
+				+ this.getPrenom() + " - " + this.telephone + " - " + this.getEtat() + " - " + this.getGenre() + " - "
+				+ adresse.toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(((Client) obj).getId() != this.id) {
+			return false;
+		}
+		return true;
+	}
+
+	public List<Panier> getPaniers() {
+		return paniers;
+	}
+
+	public void setPaniers(List<Panier> paniers) {
+		this.paniers = paniers;
+	}
+
+	public Paiement getPaiement() {
+		return paiement;
+	}
+
+	public void setPaiement(Paiement paiement) {
+		this.paiement = paiement;
 	}
 }

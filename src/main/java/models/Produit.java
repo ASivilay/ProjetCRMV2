@@ -1,11 +1,34 @@
 package models;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "produit")
 public class Produit {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(nullable = false, length = 255)
 	private String nom;
+	
+	@Column(nullable = true)
 	private String description;
+	
+	@Column(nullable = false)
 	private float prix;
+	
+    @OneToMany(mappedBy="produit")
+    private List<Contient> contients;
 
 	/* Constructeurs */
 	public Produit() {
@@ -60,5 +83,21 @@ public class Produit {
 	@Override
 	public String toString() {
 		return "[" + this.getId() + "] " + this.getNom() + " - " + this.getDescription() + " - " + this.getPrix();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(((Produit) obj).getId() != this.id) {
+			return false;
+		}
+		return true;
+	}
+
+	public List<Contient> getContients() {
+		return contients;
+	}
+
+	public void setContients(List<Contient> contients) {
+		this.contients = contients;
 	}
 }

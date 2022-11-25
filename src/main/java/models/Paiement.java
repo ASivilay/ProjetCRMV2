@@ -1,11 +1,32 @@
 package models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "paiement")
 public class Paiement {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(nullable = false)
 	private int numCarte;
+	
+	@Column(nullable = false)
 	private int codeConf;
+	
+	@Column(nullable = true, length = 255)
 	private String banque;;
+	
+	@OneToOne(fetch = FetchType.LAZY)
 	private Client client;
 
 	public Paiement() {
@@ -72,4 +93,11 @@ public class Paiement {
 		return "[" + id + "] " + this.getNumCarte() + " - " + this.getCodeConf() + " - " + this.getBanque()	+ " - "+ client.toString();
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if(((Paiement) obj).getId() != this.id) {
+			return false;
+		}
+		return true;
+	}
 }
