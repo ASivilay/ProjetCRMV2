@@ -1,7 +1,9 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,37 +21,41 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@Column(nullable = false, length = 255)
 	private String nom;
-
+	
 	@Column(nullable = false, length = 255)
 	private String prenom;
-
-	@Column(nullable = false, length = 255)
+	
+	@Column(length = 255)
 	private String mail;
-
-	@Column(nullable = true, length = 255)
+	
+	@Column(length = 255)
 	private String nomSociete;
 
-	@Column(nullable = false, length = 10)
+	@Column(length = 10)
 	private String telephone;
-
+	
 	@Column(nullable = true)
 	private int etat;
-
+	
 	@Column(nullable = true)
 	private int genre;
-
+	
 	@OneToOne(fetch = FetchType.LAZY)
 	private Adresse adresse;
 	
-	@OneToMany(mappedBy="client")
-	private List<Panier> paniers;
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	private List<Paiement> paiements = new ArrayList<>();
 	
-	@OneToOne(mappedBy="client", fetch=FetchType.LAZY )
-	private Paiement paiement;
+	@OneToOne(mappedBy = "client", fetch=FetchType.LAZY )
+	private Panier panier;
 
+	
+	
+
+	//Constructeurs
 	public Client() {
 	}
 
@@ -149,35 +155,25 @@ public class Client {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
+	
+	public List<Paiement> getPaiements() {
+		return paiements;
+	}
 
+	public void setPaiements(List<Paiement> paiements) {
+		this.paiements = paiements;
+	}
+	
+	public Panier getPanier() {
+		return panier;
+	}
+
+	public void setPanier(Panier panier) {
+		this.panier = panier;
+	}
+	
 	@Override
 	public String toString() {
-		return "[" + this.getId() + "] " + this.getNomSociete() + " - " + this.getMail() + " - " + this.getNom() + " "
-				+ this.getPrenom() + " - " + this.telephone + " - " + this.getEtat() + " - " + this.getGenre() + " - "
-				+ adresse.toString();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if(((Client) obj).getId() != this.id) {
-			return false;
-		}
-		return true;
-	}
-
-	public List<Panier> getPaniers() {
-		return paniers;
-	}
-
-	public void setPaniers(List<Panier> paniers) {
-		this.paniers = paniers;
-	}
-
-	public Paiement getPaiement() {
-		return paiement;
-	}
-
-	public void setPaiement(Paiement paiement) {
-		this.paiement = paiement;
+		return "[" + this.getId() + "] " + this.getNomSociete() + " - " + this.getMail() + " - " + this.getNom() + " " + this.getPrenom() + " - " + this.telephone + " - " + this.getEtat() + " - " + this.getGenre() + " - " + adresse.toString();
 	}
 }
