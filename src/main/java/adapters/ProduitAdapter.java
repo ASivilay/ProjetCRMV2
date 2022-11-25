@@ -1,8 +1,8 @@
 package adapters;
 
-<<<<<<< HEAD
-public class ProduitAdapter {
-=======
+
+
+
 import java.lang.reflect.Type;
 
 import com.google.gson.JsonElement;
@@ -24,6 +24,5 @@ public class ProduitAdapter implements JsonSerializer<Produit>{
 		
 		return json;
 	}
->>>>>>> origin/Jean-Sebastien
 
 }
