@@ -33,7 +33,7 @@ public class Client {
 	
 	@Column(length = 255)
 	private String nomSociete;
-	
+
 	@Column(length = 10)
 	private String telephone;
 	
@@ -162,6 +162,14 @@ public class Client {
 
 	public void setPaiements(List<Paiement> paiements) {
 		this.paiements = paiements;
+	}
+	
+	public Panier getPanier() {
+		return panier;
+	}
+
+	public void setPanier(Panier panier) {
+		this.panier = panier;
 	}
 	
 	@Override
