@@ -12,11 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "adresse")
 public class Adresse {
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> origin/Jean-Sebastien
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -30,18 +26,11 @@ public class Adresse {
 	@Column(nullable = false, length = 255)
 	private String pays;
 	
-<<<<<<< HEAD
 	@Column(nullable = false, length = 255)
 	private String codePostal;
 	
 	
 	@OneToOne(mappedBy = "adresse", fetch = FetchType.LAZY)
-=======
-	@Column(nullable = false, length = 5)
-	private String codePostal;
-	
-	@OneToOne( mappedBy="adresse", fetch=FetchType.LAZY )
->>>>>>> origin/Jean-Sebastien
 	private Client client;
 
 	
@@ -121,13 +110,4 @@ public class Adresse {
 	public String toString() {
 		return "[" + this.getId() + "] " + this.getRue() + " " + this.getCodePostal() + " " + this.getVille() + " " + this.getPays();
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if(((Adresse) obj).getId() != this.id) {
-			return false;
-		}
-		return true;
-	}
-
 }
